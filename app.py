@@ -3,7 +3,6 @@ os.environ['KIVY_IMAGE'] = 'pil,sdl2'
 
 import kivy
 from kivy.app import App
-
 from appmod.appcontroller import AppContent, SM
 
 class MainApp(App):

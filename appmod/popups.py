@@ -1,6 +1,6 @@
 from kivy.uix.popup import Popup
 from kivy.properties import ObjectProperty
-from mimod.db import DB
+from appmod.db import DB
 
 # POPUP For Adding VSAT Site to the DB
 class ADDVSATPOPUP(Popup):

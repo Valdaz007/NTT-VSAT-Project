@@ -1,8 +1,7 @@
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.garden.mapview import MapView, MapMarker, MapMarkerPopup
 from kivy.properties import ObjectProperty
-from mimod.db import DB
-from mimod.popups import *
+from appmod.db import DB
 
 class SM(ScreenManager):
     pass
@@ -64,6 +63,7 @@ class AppContent(Screen):
         cls.mv_DB.close_DBConn()
 
 
+# Kivy's MapView Module
 class MainMapView(MapView):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
