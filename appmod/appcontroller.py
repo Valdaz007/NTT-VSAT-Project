@@ -1,8 +1,11 @@
-from kivy.uix.screenmanager import Screen
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.garden.mapview import MapView, MapMarker, MapMarkerPopup
 from kivy.properties import ObjectProperty
 from mimod.db import DB
 from mimod.popups import *
+
+class SM(ScreenManager):
+    pass
 
 class AppContent(Screen):
     mv_Main = ObjectProperty(None)
