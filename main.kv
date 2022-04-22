@@ -1,0 +1,29 @@
+#: include 'mv_main.kv'
+
+<AppContent>:
+    mv_Main: mv_main
+    id: appcontent
+    BoxLayout:
+        orientation: "vertical"
+
+        MainMapView:
+            id: mv_main
+
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint: None,None
+                height: "60dp"
+                width: "600dp"
+
+                Button:
+                    text: "POM"
+                    on_press: root.on_btnPress("POM")
+                Button:
+                    text: "LAE"
+                    on_press: root.on_btnPress("LAE")
+                Button:
+                    text: "MT HAGEN"
+                    on_press: root.on_btnPress("HGN")
+                Button:
+                    text: "KOKOPO"
+                    on_press: root.on_btnPress("KPO")
