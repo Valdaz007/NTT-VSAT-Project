@@ -35,7 +35,7 @@ class AppContent(Screen):
 
     def add_DBMarkers(cls):
         '''
-            This function servers to pull
+            This function servers to pull VSAT data from the database return it
         '''
 
         # Pulling Sites From db.py
