@@ -31,7 +31,6 @@ class DB:
             self.close_DBConn()
             return False
         return True
-    
 
     # Implementing INSERT INTO DB Tbl in SQL Query
     def add_VSite(self, vid, lat, lon):
@@ -47,7 +46,6 @@ class DB:
             return False
         return True
 
-
     def add_PSite(self, pcode, lat, lon):
         query = f"INSERT INTO province (pro_code, pro_lat, pro_lon) VALUES (?, ?, ?);"
         print(query)
@@ -59,7 +57,6 @@ class DB:
             self.close_DBConn()
             return False
         return True
-
 
     def remove_VSite(self, vid):
         query = "DELETE FROM vsat WHERE vsat_id = ?"
