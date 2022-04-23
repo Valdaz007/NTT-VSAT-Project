@@ -10,7 +10,7 @@ class AppContent(Screen):
     mv_Main = ObjectProperty(None)
     markers = {}
     mv_DB = DB()
-    
+
     def create_MapMarker(cls, lat: str, lon: str):
         return SiteMapMarker(lat=lat, lon=lon)
 
@@ -25,7 +25,6 @@ class AppContent(Screen):
 
     def new_MapMarker(cls, vid):
         print(vid)
-        cls.openDB()
         sites = cls.mv_DB.pull_Site(tbl_Name = "vsat")
         if sites != False:
             for site in sites:
@@ -33,9 +32,12 @@ class AppContent(Screen):
                     print(f"site[0] - {site[0]}")
                     cls.markers[site[0]] = cls.create_MapMarker(site[1], site[2])
                     cls.add_MapMarker(cls.markers[site[0]])
-        cls.closeDB()
 
     def add_DBMarkers(cls):
+        '''
+            This function servers to pull
+        '''
+
         # Pulling Sites From db.py
         sites = cls.mv_DB.pull_Site(tbl_Name = "vsat")
         if sites == False:
@@ -45,17 +47,14 @@ class AppContent(Screen):
                 cls.markers[site[0]] = cls.create_MapMarker(site[1], site[2])
                 cls.add_MapMarker(cls.markers[site[0]])
             print(cls.markers.keys())
-        cls.closeDB()
 
     def on_btnPress(cls, code: str):
-        cls.openDB()
         provinces = cls.mv_DB.pull_Site(tbl_Name="province")
         if provinces != False:
             for province in provinces:
                 if province[0] == code:
                     cls.mv_Main.center_on(float(province[1]), float(province[2]))
-        cls.closeDB()
-    
+
     def openDB(cls):
         cls.mv_DB.open_DBConn()
 

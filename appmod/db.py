@@ -1,12 +1,12 @@
 import sqlite3
 
 class DB:
-    def __init__(cls):
-        cls.open_DBConn()
-
     def open_DBConn(cls):
         cls.connection = sqlite3.connect('app.db')
         cls.pointer = cls.connection.cursor()
+    
+    def close_DBConn(cls):
+        cls.connection.close()
 
     # Implement Create DB Tbl SQL Query
     def create_Table(self, tbl_Name: str, fields = []):
@@ -70,21 +70,22 @@ class DB:
         except sqlite3.Error as e:
             print(e)
 
-    def pull_Site(self, tbl_Name: str, col_id="", id = ""):
+    def pull_Site(cls, tbl_Name: str, col_id="", id = ""):
+        cls.open_DBConn()
         # Pull VSAT Site Data From DB and Return
         query = f"SELECT * FROM {tbl_Name}"
         if id != "" and col_id != "":
             query += f"WHERE {col_id} = '{id}'"
         try:
-            self.pointer.execute(
+            cls.pointer.execute(
                 f"SELECT * FROM {tbl_Name};")
         except sqlite3.Error as e:
             print(e)
+            cls.close_DBConn()
             return False
-        return self.pointer.fetchall()
+        tmp = cls.pointer.fetchall()
+        cls.close_DBConn()
+        return tmp
     
     def pull_PSite(self):
         pass
-    
-    def close_DBConn(self):
-        self.connection.close()
