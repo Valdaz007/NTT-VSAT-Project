@@ -1,12 +1,30 @@
 #: include 'mv_main.kv'
 
 <ADDVSATPOPUP>:
+    vid: vsat_id
+    vlat: vsat_lat
+    vlon: vsat_lon
+
     title: "Add VSAT Site"
     size_hint: (None, None)
     size: (400, 400)
-    Button:
-        text: "Close Popup"
-        on_release: root.dismiss()
+    BoxLayout:
+        orientation: "vertical"
+        TextInput:
+            id: vsat_id
+            hint_text: "VSAT ID"
+        TextInput:
+            id: vsat_lat
+            hint_text: "VSAT Latitude"
+        TextInput:
+            id: vsat_lon
+            hint_text: "VSAT Longitude"
+        Button:
+            text: "Submit"
+            on_release: root.dismiss()
+        Button:
+            text: "Cancel"
+            on_release: root.dismiss()
 
 <AppContent>:
     mv_Main: mv_main
