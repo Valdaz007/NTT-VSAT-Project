@@ -2,6 +2,8 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.garden.mapview import MapView, MapMarker, MapMarkerPopup
 from kivy.properties import ObjectProperty
 from appmod.db import DB
+from kivy.uix.popup import Popup
+from appmod.popups import ADDVSATPOPUP
 
 class SM(ScreenManager):
     pass
@@ -60,6 +62,10 @@ class AppContent(Screen):
 
     def closeDB(cls):
         cls.mv_DB.close_DBConn()
+
+    def showAddPopup(cls):
+        cls.show = ADDVSATPOPUP()
+        cls.show.open()
 
 
 # Kivy's MapView Module

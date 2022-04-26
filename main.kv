@@ -1,5 +1,13 @@
 #: include 'mv_main.kv'
 
+<ADDVSATPOPUP>:
+    title: "Add VSAT Site"
+    size_hint: (None, None)
+    size: (400, 400)
+    Button:
+        text: "Close Popup"
+        on_release: root.dismiss()
+
 <AppContent>:
     mv_Main: mv_main
     id: appcontent
@@ -29,4 +37,4 @@
                     on_press: root.on_btnPress("KPO")
                 Button:
                     text: "ADD"
-                    on_press: print("Add Site")
+                    on_release: root.showAddPopup()
