@@ -4,18 +4,20 @@ from appmod.db import DB
 
 # POPUP For Adding VSAT Site to the DB
 class ADDVSATPOPUP(Popup):
-    add_vid = ObjectProperty(None)
-    add_vlat = ObjectProperty(None)
-    add_vlon = ObjectProperty(None)
+    vid = ObjectProperty(None)
+    vlat = ObjectProperty(None)
+    vlon = ObjectProperty(None)
 
     def add_VSite(cls):
-        if cls.add_vid.text == "" or cls.add_vlat.text == "" or cls.add_vlon.text == "":
+        if cls.vid.text == "" or cls.vlat.text == "" or cls.vlon.text == "":
             return False
         else:
             mv_DB = DB()
-            mv_DB.add_VSite(cls.add_vid.text, cls.add_vlat.text, cls.add_vlon.text)
+            mv_DB.add_VSite(cls.vid.text, cls.vlat.text, cls.vlon.text)
             cls.dismiss()
-            return cls.add_vid.text
+
+    def betaTest(cls):
+        print(f"{cls.vid.text}, {cls.vlat.text}, {cls.vlon.text}")
 
 
 # POPUP For Removing VSAT Site from the DB
@@ -38,4 +40,3 @@ class ERRORPOPUP(Popup):
             mv_DB = DB()
             mv_DB.add_VSite(cls.add_vid.text, cls.add_vlat.text, cls.add_vlon.text)
             cls.dismiss()
-            return cls.add_vid.text

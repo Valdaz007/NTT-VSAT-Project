@@ -33,17 +33,19 @@ class DB:
         return True
 
     # Implementing INSERT INTO DB Tbl in SQL Query
-    def add_VSite(self, vid, lat, lon):
+    def add_VSite(cls, vid, lat, lon):
+        cls.open_DBConn()
         # Insert Into Table Query
-        query = f"INSERT INTO vsat (vsat_id, vsat_lat, vsat_lon) VALUES (?, ?, ?);"
+        query = "INSERT INTO vsat (vsat_id, vsat_lat, vsat_lon) VALUES (?, ?, ?);"
         print(query)
         try:
-            self.pointer.execute(query, (vid, lat, lon))
-            self.connection.commit()
+            cls.pointer.execute(query, (vid, lat, lon))
+            cls.connection.commit()
         except sqlite3.Error as e:
             print(e)
-            self.close_DBConn()
+            cls.close_DBConn()
             return False
+        cls.close_DBConn()
         return True
 
     def add_PSite(self, pcode, lat, lon):
