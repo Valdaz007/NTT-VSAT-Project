@@ -2,7 +2,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.garden.mapview import MapView, MapMarker, MapMarkerPopup
 from kivy.properties import ObjectProperty
 from appmod.db import DB
-from appmod.popups import ADDVSATPOPUP
+from appmod.popups import ADDVSATPOPUP, DELETEVSATPOPUP
 
 class SM(ScreenManager):
     pass
@@ -80,6 +80,10 @@ class AppContent(Screen):
 
     def showAddPopup(cls):
         cls.show = ADDVSATPOPUP()
+        cls.show.open()
+
+    def showDelPopup(cls):
+        cls.show = DELETEVSATPOPUP()
         cls.show.open()
 
 

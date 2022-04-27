@@ -22,13 +22,13 @@ class ADDVSATPOPUP(Popup):
 
 # POPUP For Removing VSAT Site from the DB
 class DELETEVSATPOPUP(Popup):
-    del_vid = ObjectProperty(None)
+    vid = ObjectProperty(None)
     
     def delete_VSite(cls):
         mv_DB = DB()
-        mv_DB.remove_VSite(cls.del_vid.text)
+        mv_DB.remove_VSite(cls.vid.text)
         cls.dismiss()
-        return cls.del_vid.text
+        return cls.vid.text
     
 # POPUP For Error Msg
 class ERRORPOPUP(Popup):

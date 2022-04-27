@@ -60,14 +60,17 @@ class DB:
             return False
         return True
 
-    def remove_VSite(self, vid):
+    def remove_VSite(cls, vid):
+        cls.open_DBConn()
         query = "DELETE FROM vsat WHERE vsat_id = ?"
         try:
-            self.pointer.execute(query, (vid,))
-            self.connection.commit()
+            cls.pointer.execute(query, (vid,))
+            cls.connection.commit()
             print('ROW DELETE!')
         except sqlite3.Error as e:
             print(e)
+            cls.close_DBConn()
+        cls.close_DBConn()
 
     def pull_Site(cls, tbl_Name: str, col_id="", id = ""):
         cls.open_DBConn()

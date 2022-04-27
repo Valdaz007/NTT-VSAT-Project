@@ -1,31 +1,5 @@
 #: include 'mv_main.kv'
 
-<ADDVSATPOPUP>:
-    vid: vsat_id
-    vlat: vsat_lat
-    vlon: vsat_lon
-
-    title: "Add VSAT Site"
-    size_hint: (None, None)
-    size: (400, 400)
-    BoxLayout:
-        orientation: "vertical"
-        TextInput:
-            id: vsat_id
-            hint_text: "VSAT ID"
-        TextInput:
-            id: vsat_lat
-            hint_text: "VSAT Latitude"
-        TextInput:
-            id: vsat_lon
-            hint_text: "VSAT Longitude"
-        Button:
-            text: "Submit"
-            on_release: root.add_VSite()
-        Button:
-            text: "Cancel"
-            on_release: root.dismiss()
-
 <AppContent>:
     mv_Main: mv_main
     id: appcontent
@@ -55,4 +29,8 @@
                     on_press: root.on_btnPress("KPO")
                 Button:
                     text: "ADD"
-                    on_release: root.showAddPopup()
+                    on_release: root.new_MapMarker(root.showAddPopup())
+                Button:
+                    text: "DELETE"
+                    on_release: root.showDelPopup()
+
