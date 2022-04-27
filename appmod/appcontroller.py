@@ -42,6 +42,7 @@ class AppContent(Screen):
                     print(f"site[0] - {site[0]}")
                     cls.markers[site[0]] = cls.create_MapMarker(site[1], site[2])
                     cls.add_MapMarker(cls.markers[site[0]])
+        cls.add_DBMarkers()
 
 
     def add_DBMarkers(cls):
@@ -56,7 +57,7 @@ class AppContent(Screen):
             for site in sites:
                 cls.markers[site[0]] = cls.create_MapMarker(site[1], site[2])
                 cls.add_MapMarker(cls.markers[site[0]])
-            print(cls.markers.keys())
+        print(cls.markers.keys())
 
 
     def on_btnPress(cls, code: str):

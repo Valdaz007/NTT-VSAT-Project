@@ -15,6 +15,7 @@ class ADDVSATPOPUP(Popup):
             mv_DB = DB()
             mv_DB.add_VSite(cls.vid.text, cls.vlat.text, cls.vlon.text)
             cls.dismiss()
+            return cls.vid.text
 
     def betaTest(cls):
         print(f"{cls.vid.text}, {cls.vlat.text}, {cls.vlon.text}")
