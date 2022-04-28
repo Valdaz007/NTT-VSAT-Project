@@ -1,8 +1,9 @@
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.garden.mapview import MapView, MapMarker, MapMarkerPopup
 from kivy.properties import ObjectProperty
-from appmod.db import DB
+from servermod.db import DB
 from appmod.popups import ADDVSATPOPUP, DELETEVSATPOPUP
+import requests
 
 class SM(ScreenManager):
     pass
@@ -47,10 +48,10 @@ class AppContent(Screen):
 
     def add_DBMarkers(cls):
         '''
-            This function servers to pull VSAT data from the database return it
+            This function serves to pull VSAT data from the database return it
         '''
-        # Pulling Sites From db.py
-        sites = cls.mv_DB.pull_Site(tbl_Name = "vsat")
+        # Pulling Sites From Database
+        sites = requests.get(f"http://127.0.0.1:5000/getmapmarkerdata").json()
         if sites == False:
             print("DB Error!")
         else:
@@ -65,27 +66,26 @@ class AppContent(Screen):
         on_btnPress depending on the 'code' argument pulls data from the province table
         and change the focus to the new coordinates in the center.
         '''
-        provinces = cls.mv_DB.pull_Site(tbl_Name="province")
+        provinces = requests.get(f"http://127.0.0.1:5000/getprovincedata").json()
         if provinces != False:
             for province in provinces:
                 if province[0] == code:
                     cls.mv_Main.center_on(float(province[1]), float(province[2]))
 
 
-    def openDB(cls):
-        cls.mv_DB.open_DBConn()
-
-    def closeDB(cls):
-        cls.mv_DB.close_DBConn()
-
-
     def showAddPopup(cls):
         cls.show = ADDVSATPOPUP()
         cls.show.open()
 
+
     def showDelPopup(cls):
         cls.show = DELETEVSATPOPUP()
         cls.show.open()
+
+
+    def betaTest(cls):
+        data_set = requests.get(f"http://127.0.0.1:5000/getmapmarkerdata")
+        print(data_set.json())
 
 
 # Kivy's MapView Module
