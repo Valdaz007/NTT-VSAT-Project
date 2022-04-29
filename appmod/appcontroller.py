@@ -51,9 +51,15 @@ class AppContent(Screen):
             This function serves to pull VSAT data from the database return it
         '''
         # Pulling Sites From Database
-        sites = requests.get(f"http://127.0.0.1:5000/getmapmarkerdata").json()
+        try:
+            sites = requests.get(f"http://127.0.0.1:5000/getmapmarkerdata/?apikey=123456").json()
+        except:
+            print('Connection Error!!!')
+            sites = False
+        
         if sites == False:
             print("DB Error!")
+
         else:
             for site in sites:
                 cls.markers[site[0]] = cls.create_MapMarker(site[1], site[2])
@@ -66,7 +72,7 @@ class AppContent(Screen):
         on_btnPress depending on the 'code' argument pulls data from the province table
         and change the focus to the new coordinates in the center.
         '''
-        provinces = requests.get(f"http://127.0.0.1:5000/getprovincedata").json()
+        provinces = requests.get(f"http://127.0.0.1:5000/getprovincedata/?apikey=123456").json()
         if provinces != False:
             for province in provinces:
                 if province[0] == code:
@@ -84,7 +90,7 @@ class AppContent(Screen):
 
 
     def betaTest(cls):
-        data_set = requests.get(f"http://127.0.0.1:5000/getmapmarkerdata")
+        data_set = requests.get(f"http://127.0.0.1:5000/getmapmarkerdata/?apikey=123456")
         print(data_set.json())
 
 

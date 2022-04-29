@@ -1,8 +1,8 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from db import DB
 import json, time
 
-api_key = 123456
+api_key = '123456'
 db = DB()
 
 app = Flask(__name__)
@@ -13,21 +13,25 @@ def betatest():
     json_dump = json.dumps(data_set)
     return json_dump
 
-@app.route("/getmapmarkerdata")
+@app.route("/getmapmarkerdata/", methods = ['GET'])
 def getMapMarkerData():
-    data_set = db.pull_Site(tbl_Name = "vsat")
-    if data_set == False:
-        return {"Msg": "DB Error!!!"}
-    else:
-        return jsonify(data_set)
+    user_query = str(request.args.get('apikey'))   # /getmapmarkerdata/?apikey=API-KEY
+    if user_query == api_key:
+        data_set = db.pull_Site(tbl_Name = "vsat")
+        if data_set == False:
+            return {"Msg": "DB Error!!!"}
+        else:
+            return jsonify(data_set)
 
-@app.route("/getprovincedata")
+@app.route("/getprovincedata/", methods = ['GET'])
 def getProvinceData():
-    data_set = db.pull_Site(tbl_Name = "province")
-    if data_set == False:
-        return {"Msg": "DB Error!!!"}
-    else:
-        return jsonify(data_set)
+    user_query = str(request.args.get('apikey'))   # /getmapmarkerdata/?apikey=API-KEY
+    if user_query == api_key:
+        data_set = db.pull_Site(tbl_Name = "province")
+        if data_set == False:
+            return {"Msg": "DB Error!!!"}
+        else:
+            return jsonify(data_set)
 
 if __name__ == '__main__':
     app.run(debug=True)
